@@ -1,24 +1,31 @@
-import React, { Component } from 'react';
-import Image from '../../images/-1.jpg';
+import React, { Component } from "react";
 
-import './ImageDisplay.scss';
+import "./ImageDisplay.scss";
+
+
+
+
 
 class ImageDisplay extends Component {
-    constructor(props) {
-        super(props)
+ 
 
-        this.state = {
-                 
+
+
+  render() {
+      console.log(this.props);
+    return (
+      <section className="image-display-section image-display">
+          {/* Display images */}
+          {this.props.imagesArray ? 
+          (this.props.imagesArray.map(image => {
+              return (
+                  <img src={image.urls.small} alt="image" />
+              )
+          })) : <div>No image</div>
         }
-    }
-
-    render() {
-        return (
-            <section className="image-display-section image-display">
-                <img src={Image} alt="" className="image-display__img"/>
-            </section>
-        )
-    }
+      </section>
+    );
+  }
 }
 
 export default ImageDisplay;
