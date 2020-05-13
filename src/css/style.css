@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@400;700&display=swap");
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  box-sizing: border-box; }
+
+.u-center-middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem; }
+
+.u-margin-bottom-bigger {
+  margin-bottom: 12rem; }
+
+.u-margin-bottom-medium {
+  margin-bottom: 5rem; }
+
+.u-margin-bottom-small {
+  margin-bottom: 2.5rem; }
+
+.u-margin-bottom-smallest {
+  margin-bottom: 1.5rem; }
+
+.u-margin-top-medium {
+  margin-top: 5rem; }
+
+.u-margin-top-big {
+  margin-top: 8rem; }
+
+.section-searchbar {
+  height: 70vh;
+  width: 90%;
+  margin: 0 auto;
+  background-image: url(../images/background.jpg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: relative; }
+
+.image-display-section {
+  width: 90%;
+  margin: 2rem auto; }

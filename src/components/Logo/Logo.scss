@@ -1,0 +1,10 @@
+.logo {
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+
+    &__img {
+        width: 20rem;
+    }
+}
