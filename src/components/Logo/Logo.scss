@@ -1,10 +1,31 @@
-.logo {
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+@import '../../sass/abstracts/variables';
 
-    &__img {
-        width: 20rem;
+.logo {
+
+    &__container {
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
     }
+
+  &__img {
+    display: block;
+    margin: 1rem auto;
+    width: 18rem;
+
+    &--move {
+      width: 8rem;
+      top: 25%;
+      left: 5%;
+    }
+  }
+
+  &__headline-primary {
+      color: $color-white;
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 400;
+      font-family: 'Montserrat', sans-serif;
+  }
 }

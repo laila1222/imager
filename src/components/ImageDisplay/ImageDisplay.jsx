@@ -21,7 +21,7 @@ class ImageDisplay extends Component {
               return (
                   <img src={image.urls.small} alt="image" />
               )
-          })) : <div>No image</div>
+          })) : <div></div>
         }
       </section>
     );
