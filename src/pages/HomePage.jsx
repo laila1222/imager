@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import SearchBar from "../components/SearchBar/SearchBar";
 import ImageDisplay from "../components/ImageDisplay/ImageDisplay";
-import './HomePage.scss';
+// For infinite scroll
+import request from "superagent";
+import debounce from "lodash.debounce";
+import "./HomePage.scss";
 
 // ES Modules syntax
 import Unsplash from "unsplash-js";
@@ -19,29 +22,103 @@ class HomePage extends Component {
       secondCol: [],
       thirdCol: [],
       inputValue: "",
+      isLoading: false,
+      error: false,
+      hasMore: true,
+      pageNumber: 1
     };
+
+    // Binds scroll event handler
+    window.onscroll = debounce(() => {
+      const {
+        loadImages,
+        state: { error, isLoading, hasMore },
+      } = this;
+
+      // Bails early if:
+      // * there's an error
+      // * it's already loading
+      // * there's nothing left to load
+      if (error || isLoading || !hasMore) return;
+
+      // Checks that the page has scrolled to the bottom
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        this.getRandomPhotos();
+      }
+    }, 100);
   }
-
- 
-
-
-
- 
 
   getRandomPhotos = () => {
-    unsplash.photos.listPhotos(1, 30, "latest")
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      const firstCol = data.slice(0, 9);
-        const secondCol = data.slice(10, 19);
-        const thirdCol = data.slice(20, 29);
+    console.log("getRandomPhotos is fired");
+    this.setState({ isLoading: true }, () => {
+      // Check if coloumns are empty or have already data
+      if (this.state.thirdCol.length === 0) {
+        unsplash.photos
+          .listPhotos(1, 30, "latest")
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            const firstTenImages = data.slice(0, 10);
+            const secondTenImages = data.slice(10, 20);
+            const thirdTenImages = data.slice(20, 30);
 
-        this.setState({ firstCol });
-        this.setState({ secondCol });
-        this.setState({ thirdCol });
-    })
-  }
+            // Fill the empty columns, turn off loader, increment pageNumber (page number is needed for .listPhotos)
+            this.setState({
+              firstCol: firstTenImages,
+              secondCol: secondTenImages,
+              thirdCol: thirdTenImages,
+              isLoading: false,
+            });
+          })
+          .catch((err) => {
+            this.setState({
+              error: err.message,
+              isLoading: false,
+            });
+          });
+      } else {
+        unsplash.photos
+          .listPhotos((this.state.pageNumber + 1), 30, "latest")
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            const firstTenImages = data.slice(0, 10);
+            const secondTenImages = data.slice(10, 20);
+            const thirdTenImages = data.slice(20, 30);
+            const newPageNumber = this.state.pageNumber + 1;
+
+            // Add new data to existing array in state
+            this.setState({
+              firstCol: [...this.state.firstCol, ...firstTenImages],
+              secondCol: [...this.state.secondCol, ...secondTenImages],
+              thirdCol: [...this.state.thirdCol, ...thirdTenImages],
+              isLoading: false,
+              pageNumber: newPageNumber
+            }, () => {console.log(this.state.pageNumber);});
+          })
+          .catch((err) => {
+            this.setState({
+              error: err.message,
+              isLoading: false,
+            });
+          });
+      }
+
+      // unsplash.photos
+      //   .listPhotos(1, 30, "latest")
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //     const firstTenImages = data.slice(0, 9);
+      //     const secondTenImages = data.slice(10, 19);
+      //     const thirdTenImages = data.slice(20, 29);
+      // })
+      //
+    });
+  };
 
   componentDidMount = () => {
     this.getRandomPhotos();
@@ -54,7 +131,11 @@ class HomePage extends Component {
           handler={this.handler}
           imagesDisplayed={this.state.imagesDisplayed}
         />
-        <ImageDisplay firstCol={this.state.firstCol} secondCol={this.state.secondCol} thirdCol={this.state.thirdCol} />
+        <ImageDisplay
+          firstCol={this.state.firstCol}
+          secondCol={this.state.secondCol}
+          thirdCol={this.state.thirdCol}
+        />
       </React.Fragment>
     );
   }

@@ -19,25 +19,24 @@ class Image extends Component {
   onDownloadClick = (id, urls) => {
     // console.log(id, download, downloadLocation);
     console.log("download clicked");
-    
 
     unsplash.photos
       .getPhoto(id)
-      .then((res) => 
-         res.json() )
+      .then((res) => res.json())
       .then((json) => {
-        console.log(json);
+        // console.log(json);
         unsplash.photos
           .downloadPhoto(json)
           .then((res) => res.json())
           .then((json) => {
-            window.open(`${json.url}.jpg`, 'Download');
-            console.log(json)});
+            window.open(`${json.url}.jpg`, "Download");
+            // console.log(json)
+          });
       });
   };
 
   render() {
-    console.log(this.props.urls);
+    // console.log(this.props.urls);
     return (
       <div className="image">
         <div className="image-container">
@@ -49,18 +48,11 @@ class Image extends Component {
         </div>
 
         <div className="image__links">
-          
-            <FontAwesomeIcon
-              icon={faDownload}
-              className="image__icon image__icon--download"
-              onClick={() =>
-                this.onDownloadClick(
-                  this.props.id,
-                  this.props.urls
-                )
-              }
-            />
-
+          <FontAwesomeIcon
+            icon={faDownload}
+            className="image__icon image__icon--download"
+            onClick={() => this.onDownloadClick(this.props.id, this.props.urls)}
+          />
 
           <div className="user">
             <img

@@ -5,6 +5,7 @@ import "./ImageDisplay.scss";
 
 class ImageDisplay extends Component {
   render() {
+    console.log(this.props);
     return (
       <div className="image-display-section image-display image-display__container">
         <div className="image-display__col image-display__col-1">
