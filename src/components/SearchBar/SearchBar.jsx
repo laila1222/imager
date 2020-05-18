@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Logo from "../Logo/Logo";
+import { withRouter } from 'react-router-dom';
 import "./SearchBar.scss";
 
 class SearchBar extends Component {
@@ -8,43 +9,11 @@ class SearchBar extends Component {
 
     this.state = {
       inputValue: "",
-      imagesDisplayed: false,
-      logoClasses: {
-        logoClass: "logo__img",
-        containerClass: "logo__container",
-        headlineClass: "logo__headline-primary",
-      },
-      searchBarClasses: "section-searchbar searchbar",
-      searchBarInputClasses:
-        "u-center-middle u-margin-top-medium searchbar__input",
     };
 
-    this.searchbarSectionRef = React.createRef();
   }
 
-  checkDisplay = () => {
-    const searchbarSection = this.searchbarSectionRef.current;
-    // if (this.state.imagesDisplayed) {
-    //   searchbarSection.style.height = "20vh";
-    // }
-    // Give new classes to Logo, that will modify it's appearance
-    this.setState({
-      logoClasses: {
-        logoClass: "logo__img logo__img--move",
-        containerClass: "logo__container logo__container--move",
-        headlineClass: "logo__headline-primary logo__headline-primary--move",
-      },
-    });
-    this.setState({
-      searchBarInputClasses:
-        "u-center-middle u-margin-top-medium searchbar__input searchbar__input--move",
-    });
-    this.setState({
-      searchBarInputClasses:
-        "searchbar__input searchbar__input--move",
-    });
-  };
-
+ 
   // Change state.inputValue when user types in input field
   handleInputChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -53,23 +22,22 @@ class SearchBar extends Component {
   // On submit call handler function with the inputValue
   handleOnSubmit = (event) => {
     event.preventDefault();
-    this.props.handler(this.state.inputValue);
-    this.setState({ imagesDisplayed: true }, () => {
-      this.checkDisplay();
-    });
+    this.props.history.push(`/photos?search=${this.state.inputValue}`);
+    
   };
 
   render() {
     return (
       <section
-        className={this.state.searchBarClasses}
+        className="section-searchbar searchbar"
         ref={this.searchbarSectionRef}
       >
         <Logo classes={this.state.logoClasses} />
-        <form className="searchbar__form" onSubmit={this.handleOnSubmit}>
+        <form className="searchbar__form u-center-middle " onSubmit={this.handleOnSubmit}>
+          <h1 className="searchbar__headline">Find beautiful and free photos</h1>
           <input
             type="text"
-            className={this.state.searchBarInputClasses}
+            className="searchbar__input"
             placeholder="Search for an image..."
             onChange={this.handleInputChange}
             name="inputValue"
@@ -80,4 +48,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);
