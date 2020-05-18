@@ -4,6 +4,8 @@ import ImageDisplay from "../components/ImageDisplay/ImageDisplay";
 // For infinite scroll
 import request from "superagent";
 import debounce from "lodash.debounce";
+
+// CSS
 import "./HomePage.scss";
 
 // ES Modules syntax
@@ -56,8 +58,9 @@ class HomePage extends Component {
     this.setState({ isLoading: true }, () => {
       // Check if coloumns are empty or have already data
       if (this.state.thirdCol.length === 0) {
+        // First render of photos
         unsplash.photos
-          .listPhotos(1, 30, "latest")
+          .listPhotos(this.state.pageNumber, 30, "latest")
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -65,7 +68,7 @@ class HomePage extends Component {
             const secondTenImages = data.slice(10, 20);
             const thirdTenImages = data.slice(20, 30);
 
-            // Fill the empty columns, turn off loader, increment pageNumber (page number is needed for .listPhotos)
+            // Fill the empty columns, turn off loader
             this.setState({
               firstCol: firstTenImages,
               secondCol: secondTenImages,
@@ -80,6 +83,7 @@ class HomePage extends Component {
             });
           });
       } else {
+        // Render more images
         unsplash.photos
           .listPhotos((this.state.pageNumber + 1), 30, "latest")
           .then((res) => res.json())
@@ -88,6 +92,7 @@ class HomePage extends Component {
             const firstTenImages = data.slice(0, 10);
             const secondTenImages = data.slice(10, 20);
             const thirdTenImages = data.slice(20, 30);
+            // A new page number is needed for unpslash-js to get new images
             const newPageNumber = this.state.pageNumber + 1;
 
             // Add new data to existing array in state
@@ -97,7 +102,7 @@ class HomePage extends Component {
               thirdCol: [...this.state.thirdCol, ...thirdTenImages],
               isLoading: false,
               pageNumber: newPageNumber
-            }, () => {console.log(this.state.pageNumber);});
+            });
           })
           .catch((err) => {
             this.setState({
@@ -106,20 +111,10 @@ class HomePage extends Component {
             });
           });
       }
-
-      // unsplash.photos
-      //   .listPhotos(1, 30, "latest")
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     console.log(data);
-      //     const firstTenImages = data.slice(0, 9);
-      //     const secondTenImages = data.slice(10, 19);
-      //     const thirdTenImages = data.slice(20, 29);
-      // })
-      //
     });
   };
 
+  // Initial render of images
   componentDidMount = () => {
     this.getRandomPhotos();
   };
@@ -135,6 +130,7 @@ class HomePage extends Component {
           firstCol={this.state.firstCol}
           secondCol={this.state.secondCol}
           thirdCol={this.state.thirdCol}
+          isLoading={this.state.isLoading}
         />
       </React.Fragment>
     );

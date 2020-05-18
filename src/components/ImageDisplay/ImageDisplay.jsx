@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Image from "../Image/Image";
+// Loader
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import "./ImageDisplay.scss";
 
 class ImageDisplay extends Component {
   render() {
-    console.log(this.props);
     return (
       <div className="image-display-section image-display image-display__container">
         <div className="image-display__col image-display__col-1">
@@ -63,6 +65,14 @@ class ImageDisplay extends Component {
             })
           ) : (
             <div></div>
+          )}
+        </div>
+
+        <div className="loader">
+          {this.props.isLoading ? (
+            <Loader type="Circles" color="#045c50" height={50} width={50} />
+          ) : (
+            <React.Fragment />
           )}
         </div>
       </div>
