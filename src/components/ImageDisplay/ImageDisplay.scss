@@ -1,4 +1,6 @@
 .image-display {
+
+
     &__img {
         width: 50rem;
     }
@@ -20,4 +22,12 @@
         margin-top: 2rem;
         width: 100%;
     }
+}
+
+.error-message-container {
+    position: relative;
+}
+
+.action-container {
+    position: relative;
 }

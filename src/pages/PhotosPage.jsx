@@ -64,12 +64,18 @@ class PhotosPage extends Component {
   };
 
   initialImageRender = (searchWord) => {
-    this.setState({ isLoading: true }, () => {
+    this.setState({ isLoading: true, hasMore: true }, () => {
       // First render of photos
       unsplash.search
         .photos(searchWord, 1, 30)
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
+
+          if (data.results.length < 1) {
+            this.setState({ hasMore: false, isLoading: false }, ()=>{ console.log(this.state.isLoading);});
+          }
+
           const firstTenImages = data.results.slice(0, 9);
           const secondTenImages = data.results.slice(10, 19);
           const thirdTenImages = data.results.slice(20, 29);
@@ -95,24 +101,29 @@ class PhotosPage extends Component {
   renderMoreImages = (searchWord) => {
     // Start Loader
     this.setState({ isLoading: true }, () => {
+      console.log(this.state.hasMore);
       unsplash.search
         .photos(searchWord, this.state.pageNumber + 1, 30)
         .then((res) => res.json())
         .then((data) => {
-          const firstTenImages = data.results.slice(0, 10);
-          const secondTenImages = data.results.slice(10, 20);
-          const thirdTenImages = data.results.slice(20, 30);
-          // A new page number is needed for unpslash-js to get new images
-          const newPageNumber = this.state.pageNumber + 1;
+          if (data.results.length < 1) {
+            this.setState({ hasMore: false, isLoading: false });
+          } else {
+            const firstTenImages = data.results.slice(0, 10);
+            const secondTenImages = data.results.slice(10, 20);
+            const thirdTenImages = data.results.slice(20, 30);
+            // A new page number is needed for unpslash-js to get new images
+            const newPageNumber = this.state.pageNumber + 1;
 
-          // Add new data to existing array in state, turn off loader
-          this.setState({
-            firstCol: [...this.state.firstCol, ...firstTenImages],
-            secondCol: [...this.state.secondCol, ...secondTenImages],
-            thirdCol: [...this.state.thirdCol, ...thirdTenImages],
-            isLoading: false,
-            pageNumber: newPageNumber,
-          });
+            // Add new data to existing array in state, turn off loader
+            this.setState({
+              firstCol: [...this.state.firstCol, ...firstTenImages],
+              secondCol: [...this.state.secondCol, ...secondTenImages],
+              thirdCol: [...this.state.thirdCol, ...thirdTenImages],
+              isLoading: false,
+              pageNumber: newPageNumber,
+            });
+          }
         })
         .catch((err) => {
           this.setState({
@@ -123,12 +134,13 @@ class PhotosPage extends Component {
     });
   };
 
-
   returnSearchWord = () => {
     const query = new URLSearchParams(window.location.search);
     const searchWord = query.get("search");
     return searchWord;
   };
+
+  checkForMoreImage = () => {};
 
   componentDidMount = () => {
     this.initialImageRender(this.returnSearchWord());
@@ -138,12 +150,15 @@ class PhotosPage extends Component {
     return (
       <div>
         <SmallSearch inputHandler={this.inputHandler} />
-        <ImageDisplay
-          firstCol={this.state.firstCol}
-          secondCol={this.state.secondCol}
-          thirdCol={this.state.thirdCol}
-          isLoading={this.state.isLoading}
-        />
+       
+          <ImageDisplay
+            firstCol={this.state.firstCol}
+            secondCol={this.state.secondCol}
+            thirdCol={this.state.thirdCol}
+            isLoading={this.state.isLoading}
+            hasMore={this.state.hasMore}
+          />
+        
       </div>
     );
   }
