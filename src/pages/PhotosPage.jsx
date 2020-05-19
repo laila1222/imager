@@ -27,6 +27,7 @@ class PhotosPage extends Component {
       error: false,
       hasMore: true,
       pageNumber: 1,
+      moreThanTen: true
     };
 
     // Binds scroll event handler
@@ -72,8 +73,12 @@ class PhotosPage extends Component {
         .then((data) => {
           console.log(data);
 
+          // If no results, loader will stop/disappear and error message will pop up (due to hasMore: true)
           if (data.results.length < 1) {
-            this.setState({ hasMore: false, isLoading: false }, ()=>{ console.log(this.state.isLoading);});
+            this.setState({ hasMore: false, isLoading: false });
+            // If there are less or equal results than 10, 
+          } else if (data.results.length <= 10) {
+            this.setState({ moreThanTen: false }, () =>{console.log(this.state.moreThanTen, 'less than ten results');})
           }
 
           const firstTenImages = data.results.slice(0, 9);
@@ -157,6 +162,7 @@ class PhotosPage extends Component {
             thirdCol={this.state.thirdCol}
             isLoading={this.state.isLoading}
             hasMore={this.state.hasMore}
+            moreThanTen={this.state.moreThanTen}
           />
         
       </div>
