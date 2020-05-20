@@ -30,6 +30,8 @@ class PhotosPage extends Component {
       pageNumber: 1,
       moreThanTen: true,
       modalOpen: false,
+      currentSearchUrl: '',
+      selectedImage: {}
     };
 
     // Binds scroll event handler
@@ -153,10 +155,23 @@ class PhotosPage extends Component {
     return searchWord;
   };
 
-  checkForMoreImage = () => {};
+  imageSelected = (data) => {
+    this.setState({ selectedImage: data }, ()=>{ console.log(this.state.selectedImage);});
+  }
+
 
   componentDidMount = () => {
     this.initialImageRender(this.returnSearchWord());
+    // Save search url in state
+    const currentSearchUrl = window.location.pathname.concat(window.location.search);
+    console.log(currentSearchUrl);
+    this.setState({ currentSearchUrl });
+
+    const query = new URLSearchParams(window.location.search);
+    
+    const checkId = query.get("id");
+    console.log(checkId);
+    
   };
 
   render() {
@@ -172,9 +187,11 @@ class PhotosPage extends Component {
           hasMore={this.state.hasMore}
           moreThanTen={this.state.moreThanTen}
           modalController={this.modalController}
+          imageSelected={this.imageSelected}
+          
         />
 
-        {this.state.modalOpen && <Modal modalController={this.modalController}/>}
+        {this.state.modalOpen && <Modal modalController={this.modalController} currentSearchUrl={this.state.currentSearchUrl} selectedImageData={this.state.selectedImage} />}
       </div>
     );
   }

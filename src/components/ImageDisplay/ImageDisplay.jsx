@@ -20,14 +20,11 @@ class ImageDisplay extends Component {
                   this.props.firstCol.map((image) => {
                     return (
                       <Image
-                        user_data={image.user}
-                        src={image.urls.small}
-                        alt_description={image.alt_description}
-                        key={image.id}
-                        id={image.id}
-                        links={image.links}
-                        urls={image.urls}
                         modalController={this.props.modalController}
+                        imageSelected={this.props.imageSelected}
+                        key={image.id}
+                        image_data={image}
+                        
                       />
                     );
                   })
@@ -40,14 +37,10 @@ class ImageDisplay extends Component {
                   this.props.secondCol.map((image) => {
                     return (
                       <Image
-                        user_data={image.user}
-                        src={image.urls.small}
-                        alt_description={image.alt_description}
+                        image_data={image}
                         key={image.id}
-                        id={image.id}
-                        links={image.links}
-                        urls={image.urls}
                         modalController={this.props.modalController}
+                        imageSelected={this.props.imageSelected}
                       />
                     );
                   })
@@ -60,14 +53,10 @@ class ImageDisplay extends Component {
                   this.props.thirdCol.map((image) => {
                     return (
                       <Image
-                        user_data={image.user}
-                        src={image.urls.small}
-                        alt_description={image.alt_description}
+                        image_data={image}
                         key={image.id}
-                        id={image.id}
-                        links={image.links}
-                        urls={image.urls}
                         modalController={this.props.modalController}
+                        imageSelected={this.props.imageSelected}
                       />
                     );
                   })
@@ -83,14 +72,10 @@ class ImageDisplay extends Component {
                   this.props.firstCol.map((image) => {
                     return (
                       <Image
-                        user_data={image.user}
-                        src={image.urls.small}
-                        alt_description={image.alt_description}
-                        key={image.id}
-                        id={image.id}
-                        links={image.links}
-                        urls={image.urls}
+                      image_data={image}
+                      key={image.id}
                         modalController={this.props.modalController}
+                        imageSelected={this.props.imageSelected}
                       />
                     );
                   })
