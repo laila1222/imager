@@ -13,11 +13,16 @@ class Image extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+    };
+  }
+
+  // Call the modalController function sent from (grand)Parent ;) 
+  onImageClick = () => {
+    this.props.modalController();
   }
 
   onDownloadClick = (id, urls) => {
-    // console.log(id, download, downloadLocation);
     console.log("download clicked");
 
     unsplash.photos
@@ -36,14 +41,16 @@ class Image extends Component {
   };
 
   render() {
-    // console.log(this.props.urls);
+    // console.log(this.props.modalController);
     return (
-      <div className="image">
-        <div className="image-container">
+      <div className="image"  >
+        <div className="image-container" >
+          <div className="image__layer" onClick={() => this.onImageClick()}></div>
           <img
             src={this.props.src}
             alt={this.props.alt_description}
             className="image__img"
+            
           />
         </div>
 

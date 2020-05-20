@@ -9,12 +9,6 @@ import "./ImageDisplay.scss";
 
 class ImageDisplay extends Component {
   render() {
-    console.log(
-      "hasmore: ",
-      this.props.hasMore,
-      "isLoading: ",
-      this.props.isLoading
-    );
     return (
       <React.Fragment>
         <div className="image-display-section image-display image-display__container">
@@ -33,6 +27,7 @@ class ImageDisplay extends Component {
                         id={image.id}
                         links={image.links}
                         urls={image.urls}
+                        modalController={this.props.modalController}
                       />
                     );
                   })
@@ -52,6 +47,7 @@ class ImageDisplay extends Component {
                         id={image.id}
                         links={image.links}
                         urls={image.urls}
+                        modalController={this.props.modalController}
                       />
                     );
                   })
@@ -71,6 +67,7 @@ class ImageDisplay extends Component {
                         id={image.id}
                         links={image.links}
                         urls={image.urls}
+                        modalController={this.props.modalController}
                       />
                     );
                   })
@@ -93,6 +90,7 @@ class ImageDisplay extends Component {
                         id={image.id}
                         links={image.links}
                         urls={image.urls}
+                        modalController={this.props.modalController}
                       />
                     );
                   })

@@ -22,7 +22,7 @@ class SmallSearch extends Component {
   handleOnSubmit = (event) => {
     event.preventDefault();
     this.props.history.push(`/photos?search=${this.state.inputValue}`);
-    this.props.inputHandler(this.state.inputValue);
+    this.props.inputHandler();
   };
 
   render() {

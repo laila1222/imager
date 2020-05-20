@@ -27,7 +27,8 @@ class HomePage extends Component {
       isLoading: false,
       error: false,
       hasMore: true,
-      pageNumber: 1
+      pageNumber: 1, 
+      moreThanTen: true
     };
 
     // Binds scroll event handler
@@ -131,6 +132,7 @@ class HomePage extends Component {
           secondCol={this.state.secondCol}
           thirdCol={this.state.thirdCol}
           isLoading={this.state.isLoading}
+          moreThanTen={this.state.moreThanTen}
         />
       </React.Fragment>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SmallSearch from "../components/SmallSearch/SmallSearch";
 import ImageDisplay from "../components/ImageDisplay/ImageDisplay";
+import Modal from "../components/Modal/Modal";
 // For infinite scroll
 import debounce from "lodash.debounce";
 // ES Modules syntax
@@ -27,7 +28,8 @@ class PhotosPage extends Component {
       error: false,
       hasMore: true,
       pageNumber: 1,
-      moreThanTen: true
+      moreThanTen: true,
+      modalOpen: false,
     };
 
     // Binds scroll event handler
@@ -55,17 +57,24 @@ class PhotosPage extends Component {
 
   // For child parent communication
   // When child (input) calls this function, change state.inputValue, then search for images with the new searchWord/inputvalue
-  inputHandler = (inputValue) => {
-    console.log(inputValue);
-    // this.setState({ inputValue }, () => {
-    //   this.searchForImage(this.returnSearchWord());
-    // });
-    console.log("searchWord", this.returnSearchWord());
+  inputHandler = () => {
     this.initialImageRender(this.returnSearchWord());
   };
 
+  // For child parent communication
+  modalController = () => {
+    console.log("do something with modal");
+    // Toggle for modal open state
+    this.setState(
+      (prevState) => ({ modalOpen: !prevState.modalOpen }),
+      () => {
+        console.log(this.state.modalOpen);
+      }
+    );
+  };
+
   initialImageRender = (searchWord) => {
-    this.setState({ isLoading: true, hasMore: true }, () => {
+    this.setState({ isLoading: true, hasMore: true, moreThanTen: true }, () => {
       // First render of photos
       unsplash.search
         .photos(searchWord, 1, 30)
@@ -76,9 +85,9 @@ class PhotosPage extends Component {
           // If no results, loader will stop/disappear and error message will pop up (due to hasMore: true)
           if (data.results.length < 1) {
             this.setState({ hasMore: false, isLoading: false });
-            // If there are less or equal results than 10, 
+            // If there are less or equal results than 10,
           } else if (data.results.length <= 10) {
-            this.setState({ moreThanTen: false }, () =>{console.log(this.state.moreThanTen, 'less than ten results');})
+            this.setState({ moreThanTen: false });
           }
 
           const firstTenImages = data.results.slice(0, 9);
@@ -106,7 +115,6 @@ class PhotosPage extends Component {
   renderMoreImages = (searchWord) => {
     // Start Loader
     this.setState({ isLoading: true }, () => {
-      console.log(this.state.hasMore);
       unsplash.search
         .photos(searchWord, this.state.pageNumber + 1, 30)
         .then((res) => res.json())
@@ -153,18 +161,20 @@ class PhotosPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="photos-page-container">
         <SmallSearch inputHandler={this.inputHandler} />
-       
-          <ImageDisplay
-            firstCol={this.state.firstCol}
-            secondCol={this.state.secondCol}
-            thirdCol={this.state.thirdCol}
-            isLoading={this.state.isLoading}
-            hasMore={this.state.hasMore}
-            moreThanTen={this.state.moreThanTen}
-          />
-        
+
+        <ImageDisplay
+          firstCol={this.state.firstCol}
+          secondCol={this.state.secondCol}
+          thirdCol={this.state.thirdCol}
+          isLoading={this.state.isLoading}
+          hasMore={this.state.hasMore}
+          moreThanTen={this.state.moreThanTen}
+          modalController={this.modalController}
+        />
+
+        {this.state.modalOpen && <Modal modalController={this.modalController}/>}
       </div>
     );
   }
