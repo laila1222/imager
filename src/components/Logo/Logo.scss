@@ -1,4 +1,5 @@
 @import "../../sass/abstracts/variables";
+@import '../../sass/abstracts/mixins';
 
 .logo {
   &__container {
@@ -26,5 +27,10 @@
     position: relative;
     bottom: 1.8rem;
     cursor: pointer;
+
+    // Brand is not visible in phone size
+    @include respond(phone) {
+     display: none;
+    }
   }
 }

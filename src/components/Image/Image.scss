@@ -1,8 +1,14 @@
 @import "../../sass/abstracts/variables";
+@import '../../sass/abstracts/mixins';
 
 .image {
   position: relative;
   cursor: pointer;
+
+  // Image-containers get margin top - except for first image
+  &:not(:first-child) {
+    margin-top: 1.5rem;
+  }
 
   &__img {
     width: 100%;
@@ -38,6 +44,11 @@
     opacity: 0;
     width: calc(100% - 1.5rem);
     height: 0;
+
+    // On non-laptop devices not visible - since there are no hover
+    @include respond(tab-land) {
+      display: none;
+    }
   }
 
   &__link {
@@ -62,8 +73,11 @@
 }
 
 .image-container {
-  margin-top: 1.5rem;
   margin-right: 1.5rem;
+
+  @include respond(phone) {
+    margin-right: 0;
+  }
 }
 
 .user {

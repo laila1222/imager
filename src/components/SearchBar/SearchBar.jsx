@@ -46,6 +46,7 @@ class SearchBar extends Component {
             onChange={this.handleInputChange}
             name="inputValue"
           />
+          <a onClick={this.handleOnSubmit} className="searchbar__button">Search</a>
         </form>
       </section>
     );

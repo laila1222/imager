@@ -1,4 +1,7 @@
 @import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+
 
 .smallSearch {
     height: 8rem;
@@ -7,6 +10,11 @@
     background-repeat: no-repeat;
     background-size: 100%; 
     position: relative;
+
+    @include respond(phone) {
+        background-size: 150%;
+        background-position: right center;
+      }
 
    &__input {
        position: absolute;
@@ -18,6 +26,16 @@
        padding-left: 1.5rem;
        font-family: 'Roboto', sans-serif;
        font-size: 1.5rem;
+       border-color: transparent;
+
+       @include respond(tab-land) {
+        width: 25rem;
+      }
+
+    //   Moves to the left
+      @include respond(phone) {
+        left: 11rem;
+      }
 
    }
 
