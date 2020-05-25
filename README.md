@@ -1,3 +1,13 @@
+!!!DEMO!!!
+
+
+Search for beautiful, free images from Unsplash. 
+Built by Lilla Kőrösi for educational purposes with Unspash API, React, Sass. 
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
