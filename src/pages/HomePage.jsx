@@ -3,7 +3,6 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import ImageDisplay from "../components/ImageDisplay/ImageDisplay";
 import Modal from "../components/Modal/Modal";
 // For infinite scroll
-import request from "superagent";
 import debounce from "lodash.debounce";
 
 // CSS
@@ -38,7 +37,6 @@ class HomePage extends Component {
     // Binds scroll event handler
     window.onscroll = debounce(() => {
       const {
-        loadImages,
         state: { error, isLoading, hasMore },
       } = this;
 

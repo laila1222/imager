@@ -13,16 +13,19 @@
   // Hovering on .image makes links visible
   &:hover &__links {
     opacity: 1;
-  
   }
 
   &:hover &__layer {
-    background-image: linear-gradient(0deg, rgba($color-black, .2) 70%, rgba($color-black, .8) 100%);
+    background-image: linear-gradient(
+      0deg,
+      rgba($color-black, 0.2) 70%,
+      rgba($color-black, 0.8) 100%
+    );
   }
 
   &__layer {
     width: calc(100% - 1.5rem);
-    height: calc(100% - .3rem);
+    height: calc(100% - 0.3rem);
     position: absolute;
   }
 
@@ -35,7 +38,6 @@
     opacity: 0;
     width: calc(100% - 1.5rem);
     height: 0;
-    
   }
 
   &__link {
@@ -65,27 +67,26 @@
 }
 
 .user {
-    margin: 2rem;
-    // User container is not 'visible', so when user clicks on the space between the links, it  would open the modal. 
-    height: 0;
-    width: 0;
+  margin: 2rem;
+  // User container is not 'visible', so when user clicks on the space between the links, it  would open the modal.
+  height: 0;
+  width: 0;
 
-    &__name {
-        color: $color-white-secondary;
-        font-size: 1.5rem;
-        font-weight: 400;
-        font-family: 'Montserrat', sans-serif;
-        display: inline-block;
-        margin: 1.5rem;
-        position: relative;
-        bottom: 1rem;
-        left: 2.5rem;
-        
-    }
+  &__name {
+    color: $color-white-secondary;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-family: "Montserrat", sans-serif;
+    display: inline-block;
+    margin: 1.5rem;
+    position: relative;
+    bottom: 1rem;
+    left: 2.5rem;
+  }
 
-    &__img {
-        display: inline-block;
-        border-radius: 50%;
-        position: absolute;
-    }
+  &__img {
+    display: inline-block;
+    border-radius: 50%;
+    position: absolute;
+  }
 }

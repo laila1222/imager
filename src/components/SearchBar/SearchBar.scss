@@ -1,49 +1,42 @@
-@import '../../sass/abstracts/variables';
+@import "../../sass/abstracts/variables";
 
 .section-searchbar {
-    height: 70vh;
-    margin: 0 auto;
-    background-image: url(../../images/backgroundFlipped.jpg);
-    // background-attachment: fixed;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    background-size: 100%; 
-    position: relative;
+  height: 70vh;
+  margin: 0 auto;
+  background-image: url(../../images/backgroundFlipped.jpg);
+  // background-attachment: fixed;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: relative;
 }
 
-
 .searchbar {
+  &__form {
+    width: 40%;
+  }
 
-    &__form {
-        width: 40%;
+  &__input {
+    display: block;
+    width: 95%;
+    margin: 0 auto;
+    height: 6rem;
+    border-radius: 1rem;
+    padding-left: 1.5rem;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.7rem;
+    border-color: transparent;
+
+    &:focus {
+      outline: none;
+      border-color: purple;
     }
+  }
 
-
-    &__input {
-        display: block;
-        width: 95%;
-        margin: 0 auto;
-        height: 6rem;
-        border-radius: 1rem;
-        padding-left: 1.5rem;
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.7rem;
-        border-color: transparent;
-
-        &:focus {
-            outline:none;
-            border-color: purple;
-        }
-
-    }
-
-    &__headline {
-        color: $color-white;
-        font-size: 3.5rem;
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-
-    
-
+  &__headline {
+    color: $color-white;
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
 }

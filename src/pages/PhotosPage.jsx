@@ -37,7 +37,6 @@ class PhotosPage extends Component {
     // Binds scroll event handler
     window.onscroll = debounce(() => {
       const {
-        loadImages,
         state: { error, isLoading, hasMore },
       } = this;
 

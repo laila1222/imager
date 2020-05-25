@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 import Logo from "../Logo/Logo";
-import { withRouter } from 'react-router-dom';
-import CreatedBy from '../CreatedBy/CreatedBy';
+import { withRouter } from "react-router-dom";
+import CreatedBy from "../CreatedBy/CreatedBy";
 import "./SmallSearch.scss";
 
 class SmallSearch extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {inputValue: ''};
+    this.state = { inputValue: "" };
   }
 
-    // Change state.inputValue when user types in input field
-    handleInputChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value }, () => {
-            console.log(this.state.inputValue);
-        });
-      };
-    
+  // Change state.inputValue when user types in input field
+  handleInputChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value }, () => {
+      console.log(this.state.inputValue);
+    });
+  };
 
   // On submit call inputHandler function with the inputValue
   handleOnSubmit = (event) => {

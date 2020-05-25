@@ -8,7 +8,6 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import "./ImageDisplay.scss";
 
 class ImageDisplay extends Component {
-  
   render() {
     console.log(this.props.hasMore);
     return (
@@ -26,7 +25,6 @@ class ImageDisplay extends Component {
                         imageSelected={this.props.imageSelected}
                         key={image.id}
                         image_data={image}
-                        
                       />
                     );
                   })
@@ -74,8 +72,8 @@ class ImageDisplay extends Component {
                   this.props.firstCol.map((image) => {
                     return (
                       <Image
-                      image_data={image}
-                      key={image.id}
+                        image_data={image}
+                        key={image.id}
                         modalController={this.props.modalController}
                         imageSelected={this.props.imageSelected}
                       />

@@ -72,6 +72,7 @@ class Image extends Component {
             <a
               href={this.props.image_data.user.links.html}
               target="_blank"
+              rel="noopener noreferrer"
               className="user__link"
             >
               <img

@@ -12,12 +12,6 @@ const accessKey = process.env.REACT_APP_ACCESS_KEY;
 const unsplash = new Unsplash({ accessKey });
 
 class Modal extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
   closeModal = () => {
     console.log("close modal");
     //   Closing modal in parent component
@@ -57,18 +51,22 @@ class Modal extends Component {
 
         <div className="modal u-center-middle">
           <div className="modal__info__user">
-            <a href={imageData.user.links.html} target="_blank" className="modal__user__link">
+            <a
+              href={imageData.user.links.html}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="modal__user__link"
+            >
               <img
                 src={this.props.selectedImageData.user.profile_image.small}
                 alt="user profile"
                 className="modal__user__img"
               />
-              
+
               <p className="modal__user__name">
                 {this.props.selectedImageData.user.name}
               </p>
-              </a>
-            
+            </a>
           </div>
 
           <div

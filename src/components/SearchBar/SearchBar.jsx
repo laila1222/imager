@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Logo from "../Logo/Logo";
-import CreatedBy from '../CreatedBy/CreatedBy';
-import { withRouter } from 'react-router-dom';
+import CreatedBy from "../CreatedBy/CreatedBy";
+import { withRouter } from "react-router-dom";
 import "./SearchBar.scss";
 
 class SearchBar extends Component {
@@ -11,10 +11,8 @@ class SearchBar extends Component {
     this.state = {
       inputValue: "",
     };
-
   }
 
- 
   // Change state.inputValue when user types in input field
   handleInputChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -24,7 +22,6 @@ class SearchBar extends Component {
   handleOnSubmit = (event) => {
     event.preventDefault();
     this.props.history.push(`/photos?search=${this.state.inputValue}`);
-    
   };
 
   render() {
@@ -35,8 +32,13 @@ class SearchBar extends Component {
       >
         <Logo classes={this.state.logoClasses} />
         <CreatedBy />
-        <form className="searchbar__form u-center-middle " onSubmit={this.handleOnSubmit}>
-          <h1 className="searchbar__headline">Find beautiful and free photos</h1>
+        <form
+          className="searchbar__form u-center-middle "
+          onSubmit={this.handleOnSubmit}
+        >
+          <h1 className="searchbar__headline">
+            Find beautiful and free photos
+          </h1>
           <input
             type="text"
             className="searchbar__input"
