@@ -31,18 +31,70 @@
     }
 
     &__image-container {
-        width: 70%;
         position: relative;
+        width: 100%;
+        margin-top: 8rem;
+        z-index: 0;
     }
 
-    &__image {
+
+
+
+    &__info__user {
+        position: absolute;
+        margin: 2rem;
+       
+
 
     }
 
+    &__user {
+        &__img {
+            border-radius: 50%;
+            width: 3.5rem;
+            display: inline-block;
+        }
 
-    &__info {
-        width: 30%;
-        border-left: 1px solid rgba($color-grey, .3);
+        &__name {
+            display: inline-block;
+            font-size: 2rem;
+            position: relative;
+            bottom: 1rem;
+            margin-left: 2rem;
+            color: $color-black;
+        }
     }
 
+
+}
+
+.download-button {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    padding: 1.5rem;
+    background-color: $color-white;
+    border: 1px solid $color-grey;
+    border-radius: 5px;
+    width: 25rem;
+    text-align: center;
+    transition: all .2s;
+
+    &:hover {
+        background-color: $color-secondary;
+        color: $color-white;
+        cursor: pointer;
+    }
+
+
+    &__icon {
+        font-size: 2rem;
+        display: inline-block;
+    }
+
+    &__text {
+        display: inline-block;
+        font-size: 1.7rem;
+        margin-left: 1rem;
+    }
 }

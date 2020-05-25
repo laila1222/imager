@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "../components/SearchBar/SearchBar";
 import ImageDisplay from "../components/ImageDisplay/ImageDisplay";
+import Modal from "../components/Modal/Modal";
 // For infinite scroll
 import request from "superagent";
 import debounce from "lodash.debounce";
@@ -27,8 +28,11 @@ class HomePage extends Component {
       isLoading: false,
       error: false,
       hasMore: true,
-      pageNumber: 1, 
-      moreThanTen: true
+      pageNumber: 1,
+      moreThanTen: true,
+      modalOpen: false,
+      selectedImage: {},
+      currentSearchUrl: "",
     };
 
     // Binds scroll event handler
@@ -53,6 +57,24 @@ class HomePage extends Component {
       }
     }, 100);
   }
+
+  // For child parent communication
+  modalController = () => {
+    console.log("do something with modal");
+    // Toggle for modal open state
+    this.setState(
+      (prevState) => ({ modalOpen: !prevState.modalOpen }),
+      () => {
+        console.log(this.state.modalOpen);
+      }
+    );
+  };
+
+  imageSelected = (data) => {
+    this.setState({ selectedImage: data }, () => {
+      console.log(this.state.selectedImage);
+    });
+  };
 
   getRandomPhotos = () => {
     console.log("getRandomPhotos is fired");
@@ -86,7 +108,7 @@ class HomePage extends Component {
       } else {
         // Render more images
         unsplash.photos
-          .listPhotos((this.state.pageNumber + 1), 30, "latest")
+          .listPhotos(this.state.pageNumber + 1, 30, "latest")
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -102,7 +124,7 @@ class HomePage extends Component {
               secondCol: [...this.state.secondCol, ...secondTenImages],
               thirdCol: [...this.state.thirdCol, ...thirdTenImages],
               isLoading: false,
-              pageNumber: newPageNumber
+              pageNumber: newPageNumber,
             });
           })
           .catch((err) => {
@@ -133,7 +155,18 @@ class HomePage extends Component {
           thirdCol={this.state.thirdCol}
           isLoading={this.state.isLoading}
           moreThanTen={this.state.moreThanTen}
+          hasMore={this.state.hasMore}
+          modalController={this.modalController}
+          imageSelected={this.imageSelected}
         />
+
+        {this.state.modalOpen && (
+          <Modal
+            modalController={this.modalController}
+            currentSearchUrl={this.state.currentSearchUrl}
+            selectedImageData={this.state.selectedImage}
+          />
+        )}
       </React.Fragment>
     );
   }

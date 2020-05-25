@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import "./Image.scss";
@@ -14,24 +14,20 @@ class Image extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
   }
 
- 
   onImageClick = (id, image_data) => {
     // Add image id to url
     // this.props.history.push(`/photos/modal/${id}`);
-      // Call the modalController function sent from (grand)Parent ;)
+    // Call the modalController function sent from (grand)Parent ;)
     this.props.modalController();
 
     // Parent component will know the selected image
     this.props.imageSelected(image_data);
-  }
+  };
 
-
-
-  onDownloadClick = (id, urls) => {
+  onDownloadClick = (id) => {
     console.log("download clicked");
 
     unsplash.photos
@@ -50,14 +46,18 @@ class Image extends Component {
   render() {
     // console.log(this.props.image_data);
     return (
-      <div className="image"  >
-        <div className="image-container" >
-          <div className="image__layer" onClick={() => this.onImageClick(this.props.image_data.id, this.props.image_data)}></div>
+      <div className="image">
+        <div className="image-container">
+          <div
+            className="image__layer"
+            onClick={() =>
+              this.onImageClick(this.props.image_data.id, this.props.image_data)
+            }
+          ></div>
           <img
             src={this.props.image_data.urls.small}
             alt={this.props.image_data.alt_description}
             className="image__img"
-            
           />
         </div>
 
@@ -65,16 +65,24 @@ class Image extends Component {
           <FontAwesomeIcon
             icon={faDownload}
             className="image__icon image__icon--download"
-            onClick={() => this.onDownloadClick(this.props.image_data.id, this.props.image_data.urls)}
+            onClick={() => this.onDownloadClick(this.props.image_data.id)}
           />
 
           <div className="user">
-            <img
-              src={this.props.image_data.user.profile_image.small}
-              alt="user"
-              className="user__img"
-            />
-            <p className="user__name">{this.props.image_data.user.username}</p>
+            <a
+              href={this.props.image_data.user.links.html}
+              target="_blank"
+              className="user__link"
+            >
+              <img
+                src={this.props.image_data.user.profile_image.small}
+                alt="user"
+                className="user__img"
+              />
+              <p className="user__name">
+                {this.props.image_data.user.username}
+              </p>
+            </a>
           </div>
         </div>
       </div>
@@ -82,4 +90,4 @@ class Image extends Component {
   }
 }
 
-export default  withRouter(Image);
+export default withRouter(Image);

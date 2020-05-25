@@ -8,7 +8,9 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import "./ImageDisplay.scss";
 
 class ImageDisplay extends Component {
+  
   render() {
+    console.log(this.props.hasMore);
     return (
       <React.Fragment>
         <div className="image-display-section image-display image-display__container">
@@ -99,7 +101,7 @@ class ImageDisplay extends Component {
             ) : (
               <React.Fragment />
             )}
-            {!this.props.hasMore ? <ErrorMessage /> : <div></div>}
+            {!this.props.hasMore && <ErrorMessage />}
           </div>
         </div>
       </React.Fragment>
