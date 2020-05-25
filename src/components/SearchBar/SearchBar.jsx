@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Logo from "../Logo/Logo";
+import CreatedBy from '../CreatedBy/CreatedBy';
 import { withRouter } from 'react-router-dom';
 import "./SearchBar.scss";
 
@@ -33,6 +34,7 @@ class SearchBar extends Component {
         ref={this.searchbarSectionRef}
       >
         <Logo classes={this.state.logoClasses} />
+        <CreatedBy />
         <form className="searchbar__form u-center-middle " onSubmit={this.handleOnSubmit}>
           <h1 className="searchbar__headline">Find beautiful and free photos</h1>
           <input

@@ -1,3 +1,5 @@
+@import '../../sass/abstracts/variables';
+
 .smallSearch {
     height: 8rem;
     background-image: url(../../images/backgroundFlipped.jpg);
@@ -20,3 +22,11 @@
    }
 
 }
+
+.created-by {
+    top: 2.5rem;
+    &__headline {
+        display: block;
+    }
+}
+

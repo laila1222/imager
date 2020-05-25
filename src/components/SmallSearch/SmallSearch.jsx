@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Logo from "../Logo/Logo";
 import { withRouter } from 'react-router-dom';
+import CreatedBy from '../CreatedBy/CreatedBy';
 import "./SmallSearch.scss";
 
 class SmallSearch extends Component {
@@ -29,6 +30,7 @@ class SmallSearch extends Component {
     return (
       <div className="smallSearch">
         <Logo />
+        <CreatedBy />
         <form className="smallSearch__form" onSubmit={this.handleOnSubmit}>
           <input
             type="text"
