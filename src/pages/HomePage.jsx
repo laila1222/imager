@@ -12,6 +12,7 @@ import "./HomePage.scss";
 import Unsplash from "unsplash-js";
 // Unsplash access key
 const accessKey = process.env.REACT_APP_ACCESS_KEY;
+const secretWord = process.env.REACT_APP_SECRET_WORD;
 // New unsplash instance using unsplash access key
 const unsplash = new Unsplash({ accessKey });
 
@@ -141,6 +142,7 @@ class HomePage extends Component {
   };
 
   render() {
+    console.log(secretWord);
     return (
       <React.Fragment>
         <SearchBar
