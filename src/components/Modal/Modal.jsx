@@ -79,6 +79,7 @@ class Modal extends Component {
             />
             <p className="download-button__text">Download from here</p>
           </div>
+          <FontAwesomeIcon className="modal__icon modal__icon--phone" icon={faTimes} onClick={() => this.closeModal()} />
 
           <div className="modal__image-container">
             <img

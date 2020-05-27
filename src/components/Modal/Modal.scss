@@ -29,8 +29,7 @@
 
   @include respond(phone) {
     width: 100vw;
-    height: 90vh;
-    top: 52% !important;
+    height: 100vh;
   }
 
   &__icon {
@@ -40,6 +39,18 @@
     color: $color-white;
     font-size: 2.5rem;
     cursor: pointer;
+
+    
+
+    &--phone {
+      display: none;
+      color: $color-black;
+      right: 4rem;
+
+      @include respond(phone) {
+      display: block;
+      }
+    }
   }
 
   &__image-container {
@@ -47,6 +58,10 @@
     width: 100%;
     margin-top: 8rem;
     z-index: 0;
+  }
+
+  &__image {
+    max-height: 45rem;
   }
 
   &__info__user {
@@ -86,7 +101,11 @@
 
   @include respond(phone) {
     width: auto;
+    right: 8rem;
   }
+
+  
+  
 
   &:hover {
     background-color: $color-secondary;
@@ -97,6 +116,8 @@
   &__icon {
     font-size: 2rem;
     display: inline-block;
+
+    
   }
 
   &__text {
