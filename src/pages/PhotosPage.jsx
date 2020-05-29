@@ -157,10 +157,6 @@ class PhotosPage extends Component {
       window.location.search
     );
     this.setState({ currentSearchUrl });
-
-    const query = new URLSearchParams(window.location.search);
-
-    const checkId = query.get("id");
   };
 
   render() {
