@@ -13,7 +13,6 @@ const unsplash = new Unsplash({ accessKey });
 
 class Modal extends Component {
   closeModal = () => {
-    console.log("close modal");
     //   Closing modal in parent component
     this.props.modalController();
     //   Url gets back to /photos?search={searchword}
@@ -26,8 +25,6 @@ class Modal extends Component {
   };
 
   onDownloadClick = (id) => {
-    console.log("download clicked");
-
     unsplash.photos
       .getPhoto(id)
       .then((res) => res.json())

@@ -30,8 +30,8 @@ class PhotosPage extends Component {
       pageNumber: 1,
       moreThanTen: true,
       modalOpen: false,
-      currentSearchUrl: '',
-      selectedImage: {}
+      currentSearchUrl: "",
+      selectedImage: {},
     };
 
     // Binds scroll event handler
@@ -64,14 +64,8 @@ class PhotosPage extends Component {
 
   // For child parent communication
   modalController = () => {
-    console.log("do something with modal");
     // Toggle for modal open state
-    this.setState(
-      (prevState) => ({ modalOpen: !prevState.modalOpen }),
-      () => {
-        console.log(this.state.modalOpen);
-      }
-    );
+    this.setState((prevState) => ({ modalOpen: !prevState.modalOpen }));
   };
 
   initialImageRender = (searchWord) => {
@@ -81,8 +75,6 @@ class PhotosPage extends Component {
         .photos(searchWord, 1, 30)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-
           // If no results, loader will stop/disappear and error message will pop up (due to hasMore: true)
           if (data.results.length < 1) {
             this.setState({ hasMore: false, isLoading: false });
@@ -155,22 +147,20 @@ class PhotosPage extends Component {
   };
 
   imageSelected = (data) => {
-    this.setState({ selectedImage: data }, ()=>{ console.log(this.state.selectedImage);});
-  }
-
+    this.setState({ selectedImage: data });
+  };
 
   componentDidMount = () => {
     this.initialImageRender(this.returnSearchWord());
     // Save search url in state
-    const currentSearchUrl = window.location.pathname.concat(window.location.search);
-    console.log(currentSearchUrl);
+    const currentSearchUrl = window.location.pathname.concat(
+      window.location.search
+    );
     this.setState({ currentSearchUrl });
 
     const query = new URLSearchParams(window.location.search);
-    
+
     const checkId = query.get("id");
-    console.log(checkId);
-    
   };
 
   render() {
@@ -187,10 +177,15 @@ class PhotosPage extends Component {
           moreThanTen={this.state.moreThanTen}
           modalController={this.modalController}
           imageSelected={this.imageSelected}
-          
         />
 
-        {this.state.modalOpen && <Modal modalController={this.modalController} currentSearchUrl={this.state.currentSearchUrl} selectedImageData={this.state.selectedImage} />}
+        {this.state.modalOpen && (
+          <Modal
+            modalController={this.modalController}
+            currentSearchUrl={this.state.currentSearchUrl}
+            selectedImageData={this.state.selectedImage}
+          />
+        )}
       </div>
     );
   }

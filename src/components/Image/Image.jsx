@@ -44,7 +44,6 @@ class Image extends Component {
   };
 
   render() {
-    // console.log(this.props.image_data);
     return (
       <div className="image">
         <div className="image-container">

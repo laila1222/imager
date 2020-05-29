@@ -12,7 +12,6 @@ import "./HomePage.scss";
 import Unsplash from "unsplash-js";
 // Unsplash access key
 const accessKey = process.env.REACT_APP_ACCESS_KEY;
-const secretWord = process.env.REACT_APP_SECRET_WORD;
 // New unsplash instance using unsplash access key
 const unsplash = new Unsplash({ accessKey });
 
@@ -59,24 +58,15 @@ class HomePage extends Component {
 
   // For child parent communication
   modalController = () => {
-    console.log("do something with modal");
     // Toggle for modal open state
-    this.setState(
-      (prevState) => ({ modalOpen: !prevState.modalOpen }),
-      () => {
-        console.log(this.state.modalOpen);
-      }
-    );
+    this.setState((prevState) => ({ modalOpen: !prevState.modalOpen }));
   };
 
   imageSelected = (data) => {
-    this.setState({ selectedImage: data }, () => {
-      console.log(this.state.selectedImage);
-    });
+    this.setState({ selectedImage: data });
   };
 
   getRandomPhotos = () => {
-    console.log("getRandomPhotos is fired");
     this.setState({ isLoading: true }, () => {
       // Check if coloumns are empty or have already data
       if (this.state.thirdCol.length === 0) {
@@ -85,7 +75,6 @@ class HomePage extends Component {
           .listPhotos(this.state.pageNumber, 30, "latest")
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             const firstTenImages = data.slice(0, 10);
             const secondTenImages = data.slice(10, 20);
             const thirdTenImages = data.slice(20, 30);
@@ -110,7 +99,6 @@ class HomePage extends Component {
           .listPhotos(this.state.pageNumber + 1, 30, "latest")
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             const firstTenImages = data.slice(0, 10);
             const secondTenImages = data.slice(10, 20);
             const thirdTenImages = data.slice(20, 30);
@@ -142,7 +130,6 @@ class HomePage extends Component {
   };
 
   render() {
-    console.log(secretWord);
     return (
       <React.Fragment>
         <SearchBar

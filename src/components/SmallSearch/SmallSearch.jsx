@@ -13,9 +13,7 @@ class SmallSearch extends Component {
 
   // Change state.inputValue when user types in input field
   handleInputChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value }, () => {
-      console.log(this.state.inputValue);
-    });
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   // On submit call inputHandler function with the inputValue

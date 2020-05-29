@@ -9,7 +9,6 @@ import "./ImageDisplay.scss";
 
 class ImageDisplay extends Component {
   render() {
-    console.log(this.props.hasMore);
     return (
       <React.Fragment>
         <div className="image-display-section image-display image-display__container">
